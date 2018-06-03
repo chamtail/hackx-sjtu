@@ -14,7 +14,10 @@ public class GazeTargetExample : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		GetComponent<MeshRenderer>().enabled = false;
+		if (text != null) {
+			text.text = "";
+		}
 	}
 	
 	// Update is called once per frame
@@ -38,15 +41,15 @@ public class GazeTargetExample : MonoBehaviour {
 
 	public void GazeEnter() {
 		Debug.Log("Gaze entered on " + gameObject.name);
-		ticking = true;
-		// todo
-		currentTime = 10;
-		startTime = Time.time / 1000;
         GetComponent<Renderer>().material.color = Color.red;
     }
 
     public void GazeExit() {
-        Debug.Log("Gaze exit from " + gameObject.name);
+		Debug.Log("Gaze exit from " + gameObject.name);
+		ticking = true;
+		// todo
+		currentTime = 10;
+		startTime = Time.time / 1000;
         GetComponent<Renderer>().material.color = Color.white;
     }
 

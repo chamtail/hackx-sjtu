@@ -33,12 +33,6 @@ public class GazeNextSphere : MonoBehaviour {
 		timers.Add (5);
 		timers.Add (-1);
 		timers.Add (-1);
-
-		float timerTime = timers [index];
-		bool timerActive = timerTime > 0;
-		timer.GetComponent<MeshRenderer>().enabled = timerActive;
-		timer.active = timerActive;
-		timerText.GetComponent<MeshRenderer>().enabled = timerActive;
 	}
 	
 	// Update is called once per frame
@@ -48,11 +42,18 @@ public class GazeNextSphere : MonoBehaviour {
 		
 	public void GazeEnter() {
 		Debug.Log("Gaze entered on " + gameObject.name);
+		GetComponent<Renderer>().material.color = Color.red;
+	}
+
+	public void GazeExit() {
+		Debug.Log("Gaze exit from " + gameObject.name);
 		if (index == instructions.Count - 1) {
 			return;
 		}
+		Debug.Log ("index not null");
 		++index;
 		instruction.text = instructions[index];
+		Debug.Log ("instruction not null");
 		if (index == instructions.Count - 1) {
 			nextText.text = "完成";
 		}
@@ -60,12 +61,12 @@ public class GazeNextSphere : MonoBehaviour {
 		bool timerActive = timerTime > 0;
 		timer.GetComponent<MeshRenderer>().enabled = timerActive;
 		timer.active = timerActive;
-		timerText.GetComponent<MeshRenderer>().enabled = timerActive;
-		GetComponent<Renderer>().material.color = Color.red;
-	}
-
-	public void GazeExit() {
-		Debug.Log("Gaze exit from " + gameObject.name);
+		Debug.Log ("timer not null");
+//		timerText.GetComponent<MeshRenderer>().enabled = timerActive;
+		if (!timerActive && timerText != null) {
+			timerText.text = "";
+		}
+//		Debug.Log ("timertext not null");
 		GetComponent<Renderer>().material.color = Color.white;
 	}
 
